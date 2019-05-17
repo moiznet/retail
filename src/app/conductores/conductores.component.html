@@ -1,0 +1,77 @@
+<div class="rowhead">
+  <div class="add_conductor" (click)="colapseView()"><div class="plusicon">+</div>
+  <div class="btntext"  >Añadir conductor</div></div>
+</div>
+
+
+<div class="formadd"   [@openClose]="divOpen"  >
+  <form #formConductor="ngForm" (ngSubmit)="insertConductor()" class="col-md-12">
+    <div class="form-group">
+      <label for="conductor_cid">cid</label>
+      <input type="text" class="form-control" name="conductor_cid"  [(ngModel)]="conductor.cid" placeholder="c1001"/>
+    </div>
+    <div class="form-group">
+      <label for="conductor_nombre">nombre</label>
+      <input class="form-control" name="conductor_nombre"  #conductor_nombre="ngModel" [(ngModel)]="conductor.nombre" placeholder="jhon doe conductor"/>
+    </div>
+    <div class="form-group">
+      <label for="t_doc">Tipo de documento</label>
+      <input class="form-control" name="t_doc"  #t_doc="ngModel" [(ngModel)]="conductor.t_doc" placeholder="CC"/>
+    </div>
+    <div class="form-group">
+      <label for="n_doc">Numero de documento</label>
+      <input class="form-control" name="n_doc"  #n_doc="ngModel" [(ngModel)]="conductor.n_doc" placeholder="0123456789"/>
+    </div>
+    <div class="form-group">
+      <label for="rh">rh</label>
+      <input class="form-control" name="rh"  #rh="ngModel" [(ngModel)]="conductor.rh" placeholder="o+"/>
+    </div>
+   
+    <input type="submit" value="Create">
+    
+  </form> 
+</div>
+
+
+<ul class="content"  [@listStagger]="conductores"  >
+  <li  class="row" id="{{conductorarr._id}}" *ngFor="let conductorarr of conductores"   > <!--  *ngFor="let contact of contacts"   (click)="selectContact(contact)"   [class.active]="contact === selectedContact" -->
+    <div class="img"><img src="assets/img/usericon.png" alt=""></div>
+    <div class="data ident">
+      <div class="ffield">Conductor:</div>
+      <div class="fvalue">{{conductorarr.cid}}</div>
+      <div class="fnombre">{{conductorarr.nombre}}</div>
+    </div>
+    <div class="data fields">
+      <div class="frow">
+        <div class="field">ID: </div>
+        <div class="value">{{conductorarr._id}}</div>
+      </div>
+      <div class="frow">
+        <div class="field">tipo de documento: </div>
+        <div class="value">{{conductorarr.t_doc}}</div>
+      </div>
+      <div class="frow">
+        <div class="field">Numero de documento: </div>
+        <div class="value">{{conductorarr.n_doc}}</div>
+      </div>
+      <div class="frow">
+        <div class="field">Conductor asignado: </div>
+        <div class="value"  *ngIf="conductorarr.asignado" >No asignado</div>
+        <div class="value"  *ngIf="!conductorarr.asignado" >Asiganado</div>
+      </div>
+    </div>
+    <div class="data fields">
+      <div class="frow">
+        <div class="field">Rh: </div>
+        <div class="value">{{conductorarr.rh}}</div>
+      </div>
+      <div class="frow">
+        <div class="btngray"   ><img src="assets/img/editicon.png" alt=""></div>
+        <div class="btngray" (click)="eraseConductor(conductorarr._id)"><img src="assets/img/deleteicon.png" alt=""></div>
+      </div>
+    
+    </div>
+  
+  </li>
+</ul>
+
